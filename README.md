@@ -14,3 +14,6 @@ Discord-based text adventure game for the ♥SuperFriends♥
 /speak <item> - speak to something, can talk to innanimate things too, just might look silly
 /roll <die type> - roll a die, not used in game, but can be used by players to determine who should get to do something.
 ```
+
+## Dungeon tiles
+https://nethackwiki.com/wiki/Dungeon_feature
