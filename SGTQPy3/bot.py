@@ -1,7 +1,7 @@
 import discord
 import asyncio
 import random
-from lib import cmdparser
+from lib import cmddict
 from lib import threadpool
 
 players = []

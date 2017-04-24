@@ -1,5 +1,5 @@
 
-class CmdParser:
+class CmdDict:
 	'''
 	handles parsing command strings into tokens to associate with function calls
 	Commands may be registered by their primary token, that is the command name itself.
@@ -9,7 +9,7 @@ class CmdParser:
 
 	cmds = {} # hold the command string and the callback function registered to it
 
-	# callback shouls take two args; opts - the rest of the tokenized string, 
+	# callback should take one arg; cmdargs - the rest of the tokenized string, 
 	def regcmd(self, cmd, cb):
 		if cmd != '':
 			self.cmds[cmd] = cb
@@ -26,7 +26,8 @@ class CmdParser:
 			delim = ' '
 		return cmdstring.split(delim)
 
-parser = CmdParser()
+'''
+parser = CmdDict()
 # register a lambda function
 parser.regcmd('!test', lambda cmdargs: [print(t) for t in cmdargs])
 parser.callcmd('!test arg1 arg2 arg3 poopy head')
@@ -36,3 +37,4 @@ def hello(cmdargs):
 	print('hello {}'.format(cmdargs[0]))
 parser.regcmd('!hello', hello)
 parser.callcmd('!hello Ibitsu!')
+'''
