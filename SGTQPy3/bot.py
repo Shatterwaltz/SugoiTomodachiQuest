@@ -2,6 +2,7 @@ import discord
 import asyncio
 import random
 
+players = ["boolean", "NickBigDong", "Ibitsu", "RobDanHill"]
 client = discord.Client()
 
 @client.event
@@ -26,19 +27,7 @@ async def on_message(message):
         await client.send_message(message.channel, 'Done sleeping')
 
     elif message.content.startswith('!help'):
-        hlp = """```
-                 !stats - show your stats
-                 !survey - survey the current area
-                 !inv - show inventory
-                    |--> this should have sub commands
-                 !use <item/thing> - use an item or environment item
-                 !move <cardinal dir> - move your player
-                 !equip <item> - equip an item
-                 !throw - throw item in hand (make sure to equip thing you want to throw first
-                 !speak <item> - speak to something, can talk to innanimate things too, just might look silly
-                 !roll <die type> - roll a die, not used in game,
-                     but can be used by players to determine who should get to do something.
-                  ```"""
+        hlp = "`this will eventually print a help message`"
         await client.send_message(message.channel, hlp)
 
     elif message.content.startswith('!roll'):
@@ -60,5 +49,19 @@ async def on_message(message):
             num = random.randrange(1, 10)
             tmp = await client.send_message(message.channel, '`Rolling d10...`')            
             await client.edit_message(tmp, '`You rolled a {}`'.format(num))
+
+    elif message.content.startswith('!join'):
+        tmp = await client.send_message(message.channel, '`Thinking...`')
+        if message.author in players:
+            await client.edit_message(tmp, '`Found you, waking up character!`')
+        else:
+            await client.edit_message(tmp, '`Looks like you don\'t exist yet... let\'s create you!`')
+            await client.send_message(message.channel, \
+                """```Choose ye class, nerd !class:
+                1: Wizardo
+                2: Sneaky fuck
+                3: Baldo
+                4: GymRat
+                5: Weeb```""")
 
 client.run('MzA1OTM2NjMwMzgyOTg1MjE3.C98edg.9bPTOe4-aB5Xk0PLeWtAhxCILFo')
