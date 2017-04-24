@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Discord;
-using Discord.Logging;
+using DSharpPlus;
 
 namespace SugoiTomodachiQuest {
     class Program {
-        static void Main(string[] args)
-            => new Program().MainAsync().GetAwaiter().GetResult();
+        public static void Main(String[] argv)
+            => new Program().Run().GetAwaiter().GetResult();
 
-        public async Task MainAsync() {
+        public async Task Run() {
+            var discord = new DiscordClient(new DiscordConfig {
+                AutoReconnect = true,
+                DiscordBranch = Branch.Stable,
+                LargeThreshold = 250,
+                LogLevel = LogLevel.Unnecessary,
+                Token = "",
+                TokenType = TokenType.Bot,
+                UseInternalLogHandler = false
+            });
+
+            await discord.Connect();
+            await Task.Delay(-1);
         }
-
-        /*private Task Log(LogMessage msg) {
-            Console.WriteLine(msg.ToString());
-            Task.CompletedTask;
-        }*/
-   }
+    }
 }
 
