@@ -12,16 +12,27 @@ class CmdParser:
 	# callback shouls take two args; opts - the rest of the tokenized string, 
 	def regcmd(self, cmd, cb):
 		if cmd != '':
-			cmds[cmd] = cb
+			self.cmds[cmd] = cb
 			return True
 		else:
 			return False
 
 	def callcmd(self, cmdstring):
-		tokens = self.tokenize(cmdstring)
-		return cmds[cmd](tokens[1:])
+		tokens = self.tokenize(cmdstring, ' ')
+		return self.cmds[tokens[0]](tokens[1:])
 
 	def tokenize(self, cmdstring, delim):
 		if delim == None or delim == '':
 			delim = ' '
 		return cmdstring.split(delim)
+
+parser = CmdParser()
+# register a lambda function
+parser.regcmd('!test', lambda cmdargs: [print(t) for t in cmdargs])
+parser.callcmd('!test arg1 arg2 arg3 poopy head')
+
+#register a normal function
+def hello(cmdargs):
+	print('hello {}'.format(cmdargs[0]))
+parser.regcmd('!hello', hello)
+parser.callcmd('!hello Ibitsu!')
