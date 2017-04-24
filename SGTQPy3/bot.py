@@ -2,7 +2,7 @@ import discord
 import asyncio
 import random
 
-players = ["boolean", "NickBigDong", "Ibitsu", "RobDanHill"]
+players = []
 client = discord.Client()
 
 @client.event
@@ -52,9 +52,11 @@ async def on_message(message):
 
     elif message.content.startswith('!join'):
         tmp = await client.send_message(message.channel, '`Thinking...`')
+        print(message.author)
         if message.author in players:
             await client.edit_message(tmp, '`Found you, waking up character!`')
         else:
+            players.append(message.author)
             await client.edit_message(tmp, '`Looks like you don\'t exist yet... let\'s create you!`')
             await client.send_message(message.channel, \
                 """```Choose ye class, nerd !class:
@@ -63,5 +65,11 @@ async def on_message(message):
                 3: Baldo
                 4: GymRat
                 5: Weeb```""")
+    elif message.content.startswith('!players'):
+        tmp = await client.send_message(message.channel, '`Hold on a sec...`')
+        plyrs = ""
+        for i in range(len(players)):
+            plyrs = plyrs + str(players[i])
+        await client.edit_message(tmp, '`{}`'.format(plyrs))
 
 client.run('MzA1OTM2NjMwMzgyOTg1MjE3.C98edg.9bPTOe4-aB5Xk0PLeWtAhxCILFo')
