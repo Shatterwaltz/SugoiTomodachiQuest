@@ -1,6 +1,8 @@
 import discord
 import asyncio
 import random
+from lib import cmdparser
+from lib import threadpool
 
 players = []
 client = discord.Client()
