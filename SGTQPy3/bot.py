@@ -3,6 +3,7 @@ import asyncio
 import random
 from lib import cmddict
 from lib import threadpool
+from game import dieroller
 
 players = []
 client = discord.Client()
@@ -16,43 +17,37 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('!test'):
+    creg = cmddict.CmdDict()
+
+    async def test(cmdargs):
         counter = 0
         tmp = await client.send_message(message.channel, 'Calculating messages...')
         async for log in client.logs_from(message.channel, limit=100):
             if log.author == message.author:
                 counter += 1
-
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('!sleep'):
+    creg.regcmd('!test', test)
+
+    async def sleep(cmdargs):
         await asyncio.sleep(5)
         await client.send_message(message.channel, 'Done sleeping')
+    creg.regcmd('!sleep', sleep)
 
-    elif message.content.startswith('!help'):
-        hlp = "`this will eventually print a help message`"
-        await client.send_message(message.channel, hlp)
-
-    elif message.content.startswith('!roll'):
+    async def rolldie(cmdargs):
         num = 0
         tmp = None
-        if ' d20' in message.content:
-            num = random.randrange(1, 20)
-            tmp = await client.send_message(message.channel, '`Rolling d20...`')            
-            await client.edit_message(tmp, '`You rolled a {}`'.format(num))
-        elif ' d2' in message.content:
-            num = random.randrange(1, 2)
-            tmp = await client.send_message(message.channel, '`Rolling d2...`')            
-            await client.edit_message(tmp, '`You rolled a {}`'.format(num))
-        elif ' d6' in message.content:
-            num = random.randrange(1, 6)
-            tmp = await client.send_message(message.channel, '`Rolling d6...`')            
-            await client.edit_message(tmp, '`You rolled a {}`'.format(num))
-        elif ' d10' in message.content:
-            num = random.randrange(1, 10)
-            tmp = await client.send_message(message.channel, '`Rolling d10...`')            
-            await client.edit_message(tmp, '`You rolled a {}`'.format(num))
+        roller = dieroller.DieRoller()
+        sides = 0
+        try: 
+            sides = int(cmdargs[0][1:])
+        except ValueError:
+            sides = 20
+        num = roller.roll(sides)
+        tmp = await client.send_message(message.channel, '`Rolling d{}`'.format(sides))
+        await client.edit_message(tmp, '`You rolled a {}`'.format(num))
+    creg.regcmd('!roll', rolldie)
 
-    elif message.content.startswith('!join'):
+    async def join(cmdargs):
         tmp = await client.send_message(message.channel, '`Thinking...`')
         print(message.author)
         if message.author in players:
@@ -67,11 +62,18 @@ async def on_message(message):
                 3: Baldo
                 4: GymRat
                 5: Weeb```""")
-    elif message.content.startswith('!players'):
+    creg.regcmd('!join', join)
+
+    async def getplayers(cmdargs):
         tmp = await client.send_message(message.channel, '`Hold on a sec...`')
         plyrs = ""
         for i in range(len(players)):
             plyrs = plyrs + str(players[i])
         await client.edit_message(tmp, '`{}`'.format(plyrs))
+    creg.regcmd('!players', getplayers)
+
+    # handle the command string passed in
+    if message.content.startswith('!'):
+        await creg.callcmdasync(message.content)
 
 client.run('MzA1OTM2NjMwMzgyOTg1MjE3.C98edg.9bPTOe4-aB5Xk0PLeWtAhxCILFo')

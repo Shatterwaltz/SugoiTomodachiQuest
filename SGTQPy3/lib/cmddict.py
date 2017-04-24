@@ -1,3 +1,4 @@
+import asyncio
 
 class CmdDict:
 	'''
@@ -20,6 +21,10 @@ class CmdDict:
 	def callcmd(self, cmdstring):
 		tokens = self.tokenize(cmdstring, ' ')
 		return self.cmds[tokens[0]](tokens[1:])
+
+	async def callcmdasync(self, cmdstring):
+		tokens = self.tokenize(cmdstring, ' ')
+		return await self.cmds[tokens[0]](tokens[1:])
 
 	def tokenize(self, cmdstring, delim):
 		if delim == None or delim == '':
