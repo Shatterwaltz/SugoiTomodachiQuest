@@ -2,31 +2,23 @@ import random
 import pprint
 class Room:
 	"""Have a field to store monsters in this room"""
-	
-	"""List holds references to four other rooms.
-	[North, South, East, West].
-	If None, then no room in that direction."""
-	adjacentRooms = [None, None, None, None]
-	
 	"""Have a field to put a chest"""
-	
-	"""coordinates tuple"""
-	coordinates = (0,0)
+
 	
 	"""Add adjacent room."""
 	def addAdjacentRoom(self, room):
-		print(str(room.getCoords())+" "+str(self.getCoords()))
+		"""print(str(room.getCoords())+" "+str(self.getCoords()))"""
 		if room.getCoords()[0]>self.coordinates[0]:
-			print ("E")
+			print ("E of "+str(self.coordinates))
 			self.adjacentRooms[2]=room
 		if room.getCoords()[0]<self.coordinates[0]: 
-			print ("W")
+			print ("W of "+str(self.coordinates))
 			self.adjacentRooms[3]=room
 		if room.getCoords()[1]>self.coordinates[1]: 
-			print ("S")
+			print ("S of "+str(self.coordinates))
 			self.adjacentRooms[1]=room
 		if room.getCoords()[1]<self.coordinates[1]: 
-			print ("N")
+			print ("N of "+str(self.coordinates))
 			self.adjacentRooms[0]=room
 	
 	def getAdjacencyList(self):
@@ -41,24 +33,27 @@ class Room:
 		if self.adjacentRooms[0]!=None:
 			ostring+="N"
 		else:
-			ostring += "X"
+			ostring += "_"
 		if self.adjacentRooms[1]!=None:
 			ostring+="S"
 		else:
-			ostring += "X"
+			ostring += "_"
 		if self.adjacentRooms[2]!=None:
 			ostring+="E"
 		else:
-			ostring += "X"
+			ostring += "_"
 		if self.adjacentRooms[3]!=None:
 			ostring+="W"
 		else:
-			ostring += "X"
+			ostring += "_"
 		return ostring	
 	
 	def __init__(self, x, y):
 		self.coordinates = (x,y)
-	
+		"""List holds references to four other rooms.
+		[North, South, East, West].
+		If None, then no room in that direction."""
+		self.adjacentRooms = [None, None, None, None]
 class MapGen:
 
 	"""possibly some errors if you try to generate a map with width or height 1"""
@@ -84,7 +79,7 @@ class MapGen:
 			newRoom = Room(selection[0], selection[1])
 			map[selection[1]][selection[0]] = newRoom
 			selection[2].addAdjacentRoom(newRoom)
-			'''newRoom.addAdjacentRoom(selection[2])'''
+			newRoom.addAdjacentRoom(selection[2])
 		return map
 		
 	"""given coordinates, return an adjacent room if it coordinates are empty"""	
@@ -121,11 +116,7 @@ class MapGen:
 
 
 
-r= Room(1,1)
-s=Room(0,1)
-r.addAdjacentRoom(s)
-print(r)
-print(s)
-print(r.getAdjacencyList())
-print(s.getAdjacencyList())
-
+m=MapGen()
+map=m.generate(3,3)
+print(m.printMap(map))
+print(map[0][2].getAdjacencyList())
