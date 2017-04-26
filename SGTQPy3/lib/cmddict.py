@@ -7,8 +7,8 @@ class CmdDict:
 	They must accompany a callback function which defines the code to be executed should
 	we receive a registered command
 	'''
-
-	cmds = {} # hold the command string and the callback function registered to it
+        def __init__(self):
+            self.cmds = {} # hold the command string and the callback function registered to it
 
 	# callback should take one arg; cmdargs - the rest of the tokenized string, 
 	def regcmd(self, cmd, cb):
