@@ -20,7 +20,8 @@ class Room:
 		if room.getCoords()[1]<self.coordinates[1]: 
 			print ("N of "+str(self.coordinates))
 			self.adjacentRooms[0]=room
-	
+		print("Now my list is "+str(self.adjacentRooms))
+		
 	def getAdjacencyList(self):
 		return self.adjacentRooms
 	
@@ -73,6 +74,7 @@ class MapGen:
 					if temp!=None:
 						"""Add a tuple containing the coords of an empty space and an adjacent room"""
 						possibleRoomLocations.append((w, h, temp))
+			print("__________")
 			"""Grab a random option from list of possibilities"""
 			selection = random.choice(possibleRoomLocations)
 			"""init a room at selected location"""
@@ -105,18 +107,11 @@ class MapGen:
 	
 	def printMap(self, map):
 		ostring=""
-		for j in range(len(map[0])):
-			for i in range(len(map)):
-				if map[i][j]==None:
+		for i in range(len(map[0])):
+			for j in range(len(map)):
+				if map[j][i]==None:
 					ostring+="|????"
 				else:
 					ostring+="|"+str(map[i][j].printAdj())
 			ostring+="|\n"	
 		return ostring
-
-
-
-m=MapGen()
-map=m.generate(3,3)
-print(m.printMap(map))
-print(map[0][2].getAdjacencyList())
