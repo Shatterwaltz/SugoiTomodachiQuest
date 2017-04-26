@@ -55,18 +55,30 @@ async def on_message(message):
     creg.regcmd('!roll', rolldie)
 
     async def join(cmdargs):
-        if not message.channel.is_private:
-            await client.send_message(message.channel, '`You may join by sending me a dm: !join`')
-        elif message.channel.is_private:
-            tmp = await client.send_message(message.channel, '`Thinking...`')
-            print(message.author)
-            if message.author in players:
-                await client.edit_message(tmp, '`Found you, waking up character!`')
-            else:
-                players.append(message.author)
-                await client.edit_message(tmp, '`Looks like you don\'t exist yet... let\'s create you!`')
-                await client.send_message(message.channel, \
-                    'CLASSES HERE EVENTUALLY')
+        tmp = await client.send_message(message.channel, '`Thinking...`')
+        print(message.author)
+        if message.author in players:
+            await client.edit_message(tmp, '`Found you, waking up character!`')
+        else:
+            players.append(message.author)
+            await client.edit_message(tmp, '`Looks like you don\'t exist yet... let\'s create you!`')
+            await client.send_message(message.channel, \
+                'Here are the classes you may start with, nerd:\n\n' \
+                + '1. Sneaky Fuk\n'\
+                + '2. Stronk Bro\n'\
+                + '3. Gigantic Braino\n'\
+                + '4. Weeabo NEET\n'\
+                + '5. Rom Com Anime Side Character\n'\
+                + 'send `!join new <class num here>` to start creating a character!\n')
+        # handle character creation.
+        print(cmdargs)
+        if len(cmdargs) != 0 and cmdargs[0] == 'new':
+            try:
+                classnum = int(cmdargs[1])
+                await client.send_message(message.channel, 'You chose class {}'.format(classnum))
+            except ValueError:
+                await client.send_message(message.channel, 'That isn\'t a class you donkass!')
+                return
     creg.regcmd('!join', join)
 
     async def getplayers(cmdargs):
