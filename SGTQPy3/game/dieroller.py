@@ -8,14 +8,14 @@ class DieRoller:
 		if sides % 2 != 0 or sides < 2:
 			return -1
 		else:
-			return random.randrange(1, sides)
+			return random.randrange(1, sides+1)
 
 	def rolltwo(self, sides):
 		if sides % 2 != 0 or sides < 2:
 			return (-1,-1)
 		else:
-			return (random.randrange(1,sides), \
-				random.randrange(1,sides))
+			return (random.randrange(1,sides+1), \
+				random.randrange(1,sides+1))
 
 	def reversepolish(self, expr):
 		# use a stack to parse and perfrom rp calculation for number of sides
