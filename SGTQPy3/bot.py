@@ -20,6 +20,16 @@ async def on_ready():
     print('------')
 
 @client.event
+async def on_member_update(before, after):
+    # What is the server that we are on?
+    print(client.servers)
+    if after.status == after.status.online:
+        tmp = await client.send_message(
+                after,
+                'Hello @{}, welcome to Sugoi Tmomdachi Quest Server'.format(after.name)
+                )
+
+@client.event
 async def on_message(message):
     creg = cmddict.CmdDict()
 
@@ -78,21 +88,23 @@ async def on_message(message):
         if len(cmdargs) != 0 and cmdargs[0] == 'new':
             try:
                 classnum = int(cmdargs[1])
-                await client.send_message(message.channel, 'You chose class {}'.format(classnum))
-                players[message.author] = player.Player(message.author) 
-                players[message.author].pcharacter = character.Character(
-                        'desc here', 
-                        str(classnum),
-                        message.author
-                        )
-                await client.send_message(message.channel, 
-                        'your character is:\n' \
-                        + players[message.author]
-                        )
-
             except ValueError:
                 await client.send_message(message.channel, 'That isn\'t a class you donkass!')
                 return
+            await client.send_message(message.channel, 'You chose class {}'.format(classnum))
+            gsess.players[message.author] = player.Player(message.author) 
+            gsess.players[message.author].pcharacter = character.Character(
+                'desc here', 
+                str(classnum),
+                message.author
+                )
+            char = gamesess.players[message.author]
+            await client.send_message(message.channel, 
+                'your character is:\n' \
+                + char.name + '\n' \
+                + char.desc + '\n' \
+                + char.did + '\n'
+                )
     creg.regcmd('!join', join)
 
     async def getplayers(cmdargs):
