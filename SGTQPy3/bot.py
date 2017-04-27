@@ -98,7 +98,7 @@ async def on_message(message):
                 str(classnum),
                 message.author
                 )
-            char = gamesess.players[message.author]
+            char = gsess.players[message.author]
             await client.send_message(message.channel, 
                 'your character is:\n' \
                 + char.name + '\n' \

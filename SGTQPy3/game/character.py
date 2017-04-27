@@ -22,11 +22,8 @@ class Character:
             'lck' : 0
         }
 
-    def setstats():
+    def setstats(self):
         return None
 
-    def getstats():
+    def getstats(self):
         return stats
-    
-    def __del__():
-        None
