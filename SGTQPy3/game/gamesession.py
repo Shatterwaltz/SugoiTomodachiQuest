@@ -1,5 +1,5 @@
 import uuid
-import player
+from game import player
 
 class GameSession:
     '''
@@ -60,6 +60,3 @@ class GameSession:
         if type(val) is uuid.uuid4:
             self.__sid = val
 
-gs = GameSession()
-print(gs.sid)
-print(gs.players)

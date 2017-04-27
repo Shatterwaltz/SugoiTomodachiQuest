@@ -1,11 +1,15 @@
 import discord
 import asyncio
 import random
+import MapGen
 from lib import cmddict
 from lib import threadpool
 from game import dieroller
+from game import gamesession
+from game import character
+from game import player
 
-players = []
+gsess = gamesession.GameSession()
 client = discord.Client()
 
 @client.event
@@ -55,12 +59,11 @@ async def on_message(message):
     creg.regcmd('!roll', rolldie)
 
     async def join(cmdargs):
-        tmp = await client.send_message(message.channel, '`Thinking...`')
+        tmp = await client.send_message(message.channel, 'Thinking...')
         print(message.author)
-        if message.author in players:
-            await client.edit_message(tmp, '`Found you, waking up character!`')
-        else:
-            players.append(message.author)
+        if message.author in gsess.players:
+            await client.edit_message(tmp, 'Found you, waking up character!')
+        elif message.author not in gsess.players or cmdargs[0] == 'classes':
             await client.edit_message(tmp, '`Looks like you don\'t exist yet... let\'s create you!`')
             await client.send_message(message.channel, \
                 'Here are the classes you may start with, nerd:\n\n' \
@@ -76,6 +79,17 @@ async def on_message(message):
             try:
                 classnum = int(cmdargs[1])
                 await client.send_message(message.channel, 'You chose class {}'.format(classnum))
+                players[message.author] = player.Player(message.author) 
+                players[message.author].pcharacter = character.Character(
+                        'desc here', 
+                        str(classnum),
+                        message.author
+                        )
+                await client.send_message(message.channel, 
+                        'your character is:\n' \
+                        + players[message.author]
+                        )
+
             except ValueError:
                 await client.send_message(message.channel, 'That isn\'t a class you donkass!')
                 return
