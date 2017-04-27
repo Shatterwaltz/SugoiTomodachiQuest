@@ -89,15 +89,6 @@ async def on_message(message):
         await client.edit_message(tmp, '`{}`\n'.format(plyrs))
     creg.regcmd('!players', getplayers)
 
-    '''
-    async def testtyping(cmdargs):
-        tmp = await client.send_message(message.channel, 'Hey! ')
-        msg = 'I think you are great!'
-        for i in range(len(msg)):
-            await client.edit_message(tmp, tmp.content + msg[:i])
-    creg.regcmd('!testtype', testtyping)
-    # add the navy seal copy pasta
-    '''
     # handle the command string passed in
     if message.content.startswith('!'):
         await creg.callcmdasync(message.content)
