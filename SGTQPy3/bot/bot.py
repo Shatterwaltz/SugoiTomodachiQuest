@@ -37,6 +37,7 @@ async def on_message(message):
         serv = auth.server
         sroles = serv.roles
         aroles = auth.roles
+        sesschannel = None
         sess = None
         dmrole = None
         for r in aroles: 
@@ -58,7 +59,8 @@ async def on_message(message):
                 serverunames = [m.name for m in serv.members]
                 print(serverunames)
                 for u in players:
-                    if u not in serverunames: validusers = False
+                    if u not in serverunames: 
+                        validusers = False
                 if not validusers: 
                     await client.send_message(
                         message.channel, 
@@ -66,6 +68,11 @@ async def on_message(message):
                         )
                     return
                 await client.create_channel(serv, sessname) # create a text channel
+
+                mentions = []
+                for m in serv.members:
+                    if m.name in players: mentions.append(m.mention)
+                print(sesschannel)
                 await client.send_message(
                     message.channel,
                     '{} game channel created, go play!'.format(sessname)
@@ -75,7 +82,7 @@ async def on_message(message):
                 for p in players:
                     sess.addplayer(player.Player(p))
                 sessions[sessname] = sess
-                await client.send_message(sessname, 'Well get to playing {}'.format(players))
+                await client.send_message(sesschannel, 'Well get to playing {}'.format(mentions))
             except discord.Forbidden:
                 await client.send_message(
                     message.channel,
