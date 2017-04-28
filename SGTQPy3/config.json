@@ -13,11 +13,11 @@
     "desc": "desc here",
     "maxlvl": 10,
     "rarities": ["list of possible rarities"],
-    "etc"
-    }
+    "etc":"etc"
+  }
   },
   "customitems": {
-    "item props here"
+    "item":"props"
   },
   "maxsessions": 10,
   "sessionttl": 1000,
@@ -26,5 +26,5 @@
   "maxmoblvl": 1000,
   "playerafktime": "3h",
   "kickondeath": true,
-  "etc etc"
+  "etc":"etc"
 }

@@ -1,9 +1,9 @@
 import discord
 import asyncio
 import random
-import MapGen
+#import MapGen
 from lib import cmddict
-from lib import threadpool
+#from ..lib import threadpool
 from game import dieroller
 from game import gamesession
 from game import character
@@ -131,55 +131,9 @@ async def on_message(message):
         await client.edit_message(tmp, '`You rolled a {}`'.format(num))
     creg.regcmd('!roll', rolldie)
 
-    # async def join(cmdargs):
-    #     tmp = await client.send_message(message.channel, 'Thinking...')
-    #     print(message.author)
-    #     if message.author in gsess.players:
-    #         await client.edit_message(tmp, 'Found you, waking up character!')
-    #     elif message.author not in gsess.players or cmdargs[0] == 'classes':
-    #         await client.edit_message(tmp, '`Looks like you don\'t exist yet... let\'s create you!`')
-    #         await client.send_message(message.channel, \
-    #             'Here are the classes you may start with, nerd:\n\n' \
-    #             + '1. Sneaky Fuk\n'\
-    #             + '2. Stronk Bro\n'\
-    #             + '3. Gigantic Braino\n'\
-    #             + '4. Weeabo NEET\n'\
-    #             + '5. Rom Com Anime Side Character\n'\
-    #             + 'send `!join new <class num here>` to start creating a character!\n')
-    #     # handle character creation.
-    #     print(cmdargs)
-    #     if len(cmdargs) != 0 and cmdargs[0] == 'new':
-    #         try:
-    #             classnum = int(cmdargs[1])
-    #         except ValueError:
-    #             await client.send_message(message.channel, 'That isn\'t a class you donkass!')
-    #             return
-    #         await client.send_message(message.channel, 'You chose class {}'.format(classnum))
-    #         gsess.players[message.author] = player.Player(message.author) 
-    #         gsess.players[message.author].pcharacter = character.Character(
-    #             'desc here', 
-    #             str(classnum),
-    #             message.author
-    #             )
-    #         char = gsess.players[message.author]
-    #         await client.send_message(message.channel, 
-    #             'your character is:\n' \
-    #             + char.name + '\n' \
-    #             + char.desc + '\n' \
-    #             + char.did + '\n'
-    #             )
-    # creg.regcmd('!join', join)
-
-    # async def getplayers(cmdargs):
-    #     tmp = await client.send_message(message.channel, '`Hold on a sec...`')
-    #     plyrs = ""
-    #     for i in range(len(players)):
-    #         plyrs = plyrs + str(players[i])
-    #     await client.edit_message(tmp, '`{}`\n'.format(plyrs))
-    # creg.regcmd('!players', getplayers)
-
     # handle the command string passed in
     if message.content.startswith('!'):
         await creg.callcmdasync(message.content)
 
-client.run('MzA1OTM2NjMwMzgyOTg1MjE3.C98edg.9bPTOe4-aB5Xk0PLeWtAhxCILFo')
+def runbot(secret):
+    client.run(secret)
