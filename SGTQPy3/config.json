@@ -1,0 +1,30 @@
+{
+  "strs": {
+  "greetings": ["Hello {}! I hope your a P O S I T I V E person today.", "etc"],
+    "help": {
+      "topic here" : []
+    },
+    "dialogue": {
+      "type here" : []
+    }
+  },
+  "custommobs": {
+    "mobname" : {
+    "desc": "desc here",
+    "maxlvl": 10,
+    "rarities": ["list of possible rarities"],
+    "etc"
+    }
+  },
+  "customitems": {
+    "item props here"
+  },
+  "maxsessions": 10,
+  "sessionttl": 1000,
+  "maxfloors": 100,
+  "maxplayerlvl": 100000,
+  "maxmoblvl": 1000,
+  "playerafktime": "3h",
+  "kickondeath": true,
+  "etc etc"
+}
