@@ -31,9 +31,9 @@ class GameSession:
         if valid:
             self.__players = val
 
-    def addplayer(self, player):
-        if type(player) is player.Player:
-            players[player.name] = player
+    def addplayer(self, p):
+        if type(p) is player.Player:
+            self.__players[p.name] = p
 
     @property
     def highscoreplayer(self):
