@@ -1,65 +1,10 @@
 import random
-import pprint
-class Room:
-	"""Have a field to store monsters in this room"""
-	"""Have a field to put a chest"""
-
-	
-	"""Add adjacent room."""
-	def addAdjacentRoom(self, room):
-		"""print(str(room.getCoords())+" "+str(self.getCoords()))"""
-		if room.getCoords()[0]>self.coordinates[0]:
-			print ("E of "+str(self.coordinates))
-			self.adjacentRooms[2]=room
-		if room.getCoords()[0]<self.coordinates[0]: 
-			print ("W of "+str(self.coordinates))
-			self.adjacentRooms[3]=room
-		if room.getCoords()[1]>self.coordinates[1]: 
-			print ("S of "+str(self.coordinates))
-			self.adjacentRooms[1]=room
-		if room.getCoords()[1]<self.coordinates[1]: 
-			print ("N of "+str(self.coordinates))
-			self.adjacentRooms[0]=room
-		print("Now my list is "+str(self.adjacentRooms))
-		
-	def getAdjacencyList(self):
-		return self.adjacentRooms
-	
-	def getCoords(self):
-		return self.coordinates
-	
-	"""Print list of directions in which other rooms lie"""
-	def printAdj(self):
-		ostring = ""
-		if self.adjacentRooms[0]!=None:
-			ostring+="N"
-		else:
-			ostring += "_"
-		if self.adjacentRooms[1]!=None:
-			ostring+="S"
-		else:
-			ostring += "_"
-		if self.adjacentRooms[2]!=None:
-			ostring+="E"
-		else:
-			ostring += "_"
-		if self.adjacentRooms[3]!=None:
-			ostring+="W"
-		else:
-			ostring += "_"
-		return ostring	
-	
-	def __init__(self, x, y):
-		self.coordinates = (x,y)
-		"""List holds references to four other rooms.
-		[North, South, East, West].
-		If None, then no room in that direction."""
-		self.adjacentRooms = [None, None, None, None]
+from room import Room
 class MapGen:
 
 	"""possibly some errors if you try to generate a map with width or height 1"""
 	def generate(self, width, height):
-		
+		print("generating...")
 		"""init empty 2d array"""
 		map = [[None for w in range(width)] for h in range(height)]
 		"""Place room in center of map"""
@@ -74,7 +19,6 @@ class MapGen:
 					if temp!=None:
 						"""Add a tuple containing the coords of an empty space and an adjacent room"""
 						possibleRoomLocations.append((w, h, temp))
-			print("__________")
 			"""Grab a random option from list of possibilities"""
 			selection = random.choice(possibleRoomLocations)
 			"""init a room at selected location"""
@@ -82,6 +26,7 @@ class MapGen:
 			map[selection[1]][selection[0]] = newRoom
 			selection[2].addAdjacentRoom(newRoom)
 			newRoom.addAdjacentRoom(selection[2])
+		print("generation complete")
 		return map
 		
 	"""given coordinates, return an adjacent room if it coordinates are empty"""	
