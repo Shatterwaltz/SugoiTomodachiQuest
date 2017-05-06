@@ -10,6 +10,18 @@ class CmdDict:
         def __init__(self):
             self.cmds = {} # hold the command string and the callback function registered to it
 
+
+        #let's make use of decorators instead
+        def regcmd(self, cmd):
+            def wrap(f): # wrap our decorated function
+                def wrapped_f(*args):
+                    # call our decorated function with args
+                    
+                return wrapped_f
+            return wrap
+
+        #how should decorator work?
+
         # callback should take one arg; cmdargs - the rest of the tokenized string, 
         def regcmd(self, cmd, cb):
                 if cmd != '':

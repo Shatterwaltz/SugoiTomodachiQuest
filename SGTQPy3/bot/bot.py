@@ -31,6 +31,7 @@ async def on_message(message):
     object and spawn a sessions channel. If the bot goes down sessions can be
     persisted by serializing game sessions.
     '''
+    @creg.regcmd('!newgame')
     async def creategame(cmdargs):
         isdm = False
         auth = message.author
