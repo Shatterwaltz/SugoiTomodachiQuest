@@ -1,5 +1,6 @@
+from ..lib import itermixin
 
-class Character:
+class Character(IterMixin):
     '''
     Character class, NPCs, players, and mobs inherit this class
     
@@ -124,11 +125,3 @@ class Character:
     def stats(self):
         return self.__stats
 
-
-c = Character("a sneaky little fuck", "rogue", None)
-c.stats.health = 100000000000000
-print(c.stats.health)
-c.stats.power = 98937499982394723987
-print(c.stats.power)
-c.stats.luck = 0
-print(c.stats.luck)
