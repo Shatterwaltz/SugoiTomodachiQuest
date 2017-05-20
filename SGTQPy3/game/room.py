@@ -18,16 +18,17 @@ class Room(object):
 		return self.__adjacentRooms
 	
 	"""0: normal
-		1: start room
-		2: boss room
-		3: secret room"""
+	   1: start room
+	   2: boss room
+	   3: Hidden room 
+	   4: Quest room"""
 	@property
 	def roomType(self):
 		return self.__roomType
 	
 	@roomType.setter
 	def roomType(self, value):
-		if value > 3 or value < 0:
+		if value > 4 or value < 0:
 			self.__roomType = 0
 		else:
 			self.__roomType = value
