@@ -20,3 +20,5 @@ Netcode Dev   - Cory Sabol
 Designer      - Cory Sabol
 
 Coffee Boi    - Sory Cabol
+
+Dice Master   - コーリ・セーボ
