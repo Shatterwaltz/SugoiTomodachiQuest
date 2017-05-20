@@ -1,6 +1,11 @@
+from game import stats
 
-class Character:
-    '''Character class, NPCs, players, and mobs inherit this class'''
+class Character(object):
+    '''
+    Class which represents a character in the game.
+    A character is anything which needs to have stats and a map position.
+    '''
+    
     def __init__(self, desc, ctype, did):	
         self.name = ''
         self.desc = ''
@@ -8,22 +13,16 @@ class Character:
         self.did = 0 #discord id, 0 is for non player characters
         self.pos = (0,0) # map room position
         self.awake = False
+        self.__stats = stats.Stats()
         
-        # these will probably change around. Just placeholder for now.
-        self.stats = {
-            'hp' : 0,
-            'str' : 0,
-            'dex' : 0,
-            'int' : 0,
-            'wis' : 0,
-            'atk' : 0,
-            'def' : 0,
-            'eva' : 0, 
-            'lck' : 0
-        }
+    @property
+    def stats(self):
+        return self.__stats
 
-    def setstats(self):
-        return None
+    @stats.setter
+    def stats(self, val):
+        if val is stats.Stats:
+            self.__state = val
+        else:
+            pass
 
-    def getstats(self):
-        return stats
