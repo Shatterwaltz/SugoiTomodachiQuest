@@ -68,11 +68,13 @@ def generateHelper(width, height, targetRoomCount, secretChance):
 	"""Check if a secret room should generate, then do so if should"""
 	if random.random() < secretChance:
 		deadEnds = getDeadEnds(map)
-		"""75% chance to create a hidden room, 25% chance for an NPC room"""
-		if random.random() < 0.75:
-			random.choice(deadEnds).roomType = 3
-		else:
-			random.choice(deadEnds).roomType = 4
+		"""Make sure there's an available dead end to turn into secret room"""
+		if deadEnds!=[]:
+			"""75% chance to create a hidden room, 25% chance for an NPC room"""
+			if random.random() < 0.75:
+				random.choice(deadEnds).roomType = 3
+			else:
+				random.choice(deadEnds).roomType = 4
 	print("generation complete")
 	return map
 	
