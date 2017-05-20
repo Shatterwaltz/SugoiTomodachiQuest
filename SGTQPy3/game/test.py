@@ -5,7 +5,7 @@
 from mapGen import generate, mapToString
 
 """Generate a 5x5 map with 24 rooms and a 49% chance to contain a secret room"""
-m = generate(5,5,24, 1);
+m = generate(5,3,24, .49);
 
 """Convert map to string and print it"""
 print (mapToString(m));
