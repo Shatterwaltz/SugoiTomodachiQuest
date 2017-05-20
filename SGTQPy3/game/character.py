@@ -1,6 +1,6 @@
-from ..lib import itermixin
+from lib import itermixin
 
-class Character(IterMixin):
+class Character(itermixin.IterMixin):
     '''
     Character class, NPCs, players, and mobs inherit this class
     
@@ -17,16 +17,21 @@ class Character(IterMixin):
     '''
 
     # stats subclass for custom setter logic
-    class Stats:
+    # each stat is a triple representing 
+    # (base,modified,modifier)
+    # This will be easy to pull apart anytime
+    # info about a stat is needed. 
+    class Stats(itermixin.IterMixin):
         def __init__(self):
-            self.__health = 0,
-            self.__armor = 0,
-            self.__power = 0,
-            self.__evasion = 0,
-            self.__accuracy = 0,
-            self.__speed = 0,
-            self.__strength = 0,
-            self.__luck = 0
+            self.__health       = (0,0,0)
+            self.__armor        = (0,0,0)
+            self.__power        = (0,0,0)
+            self.__evasion      = (0,0,0)
+            self.__accuracy     = (0,0,0)
+            self.__speed        = (0,0,0)
+            self.__strength     = (0,0,0)
+            self.__luck         = (0,0,0)
+            self.__resitance    = (0,0,0)
 
         @property
         def health(self):
@@ -124,4 +129,11 @@ class Character(IterMixin):
     @property
     def stats(self):
         return self.__stats
+
+    @stats.setter
+    def stats(self, val):
+        if val is self.Stats:
+            self.__state = val
+        else:
+            pass
 
