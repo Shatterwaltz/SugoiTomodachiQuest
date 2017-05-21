@@ -4,3 +4,4 @@ from test import charactertest
 
 # Test the character class
 charactertest.test_stat_assign()
+charactertest.test_stat_gen()
