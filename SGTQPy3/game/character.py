@@ -67,10 +67,17 @@ class Character(object):
                 newMod = newMod + mod
                 newStat = (base, newMod, base+newMod) 
                 self.stats.__dict__[stat] = newStat
-                
-                
 
-                
-
-
+    def applyStats(self, stats):
+        '''
+        apply modifier to the stats of the character
+        it is assumed that only the mod value of the incoming
+        stats object will be used.
+        '''
+        for stat, val in stats:
+            _,newMod,_ = val
+            base, prevMod, modified = self.stats.__dict__[stat]
+            newStat = (base, newMod,base+newMod)
+            self.stats.__dict__[stat] = newStat
+            
 
