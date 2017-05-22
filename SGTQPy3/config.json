@@ -19,6 +19,18 @@
   "customitems": {
     "item":"props"
   },
+  "classBaseStats": {
+    "rogue": {
+      "health": [5,0,0],
+      "armor": [4,0,0],
+      "power": [3,0,0],
+      "evasion": [6,0,0],
+      "speed": [6,0,0],
+      "strength": [3,0,0],
+      "luck": [4,0,0],
+      "resistance": [5,0,0]
+    }
+  },
   "maxsessions": 10,
   "sessionttl": 1000,
   "maxfloors": 100,

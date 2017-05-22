@@ -66,7 +66,7 @@ def test_stat_apply():
     statMod.health        = (0,5)
     statMod.armor         = (0,1094987498798739875098209809409875630938709270)
     statMod.power         = (0,0)
-    statMod.evasion       = (0,0)
+    statMod.evasion       = (0,-1)
     statMod.accuracy      = (0,10)
     statMod.speed         = (0,0)
     statMod.strength      = (0,10000)
