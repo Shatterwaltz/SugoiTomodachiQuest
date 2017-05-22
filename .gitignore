@@ -1,3 +1,4 @@
-*.swp
-*.pyc
+/SGTQPy3/**/*.swp
+SGTQPy3/**/*.pyc
 **/__pycache__/
+*.swp
