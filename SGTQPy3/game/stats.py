@@ -9,14 +9,15 @@ from lib import itermixin
 class Stats(itermixin.IterMixin):
     '''
     STATS:
-        Health:     HP
-        Armor:      AR
-        Power:      PW
-        Evasion:    EV
-        Accuracy:   AC
-        Speed:      SP
-        Status:     ST
-        Luck:       LK
+        Health
+        Armor
+        Power
+        Evasion
+        Accuracy
+        Speed
+        Status
+        Luck
+        Resistance 
 
     '''
 
@@ -29,7 +30,7 @@ class Stats(itermixin.IterMixin):
         self.__speed        = (0,0,0)
         self.__strength     = (0,0,0)
         self.__luck         = (0,0,0)
-        self.__resitance    = (0,0,0)
+        self.__resistance   = (0,0,0)
 
     @property
     def health(self):
@@ -37,17 +38,19 @@ class Stats(itermixin.IterMixin):
     @health.setter
     def health(self, val):
         try:
-            self.__health = int(val)
+            base, mod = val
+            self.__health = (base, mod, base+mod)  
         except ValueError:
             pass
 
     @property
     def armor(self):
-        return self.__health
+        return self.__armor
     @health.setter
     def armor(self, val):
         try:
-            self.__health = int(val)
+            base, mod = val
+            self.__armor = (base, mod, base+mod) 
         except ValueError:
             pass
 
@@ -57,7 +60,8 @@ class Stats(itermixin.IterMixin):
     @power.setter
     def power(self, val):
         try:
-            self.__power = int(val)
+            base, mod = val
+            self.__power = (base, mod, base+mod) 
         except ValueError:
             pass
 
@@ -67,7 +71,8 @@ class Stats(itermixin.IterMixin):
     @evasion.setter
     def evasion(self, val):
         try:
-            self.__evasion = int(val)
+            base, mod = val
+            self.__evasion = (base, mod, base+mod)
         except ValueError:
             pass
 
@@ -77,7 +82,8 @@ class Stats(itermixin.IterMixin):
     @accuracy.setter
     def accuracy(self, val):
         try:
-            self.__accuracy = int(val)
+            base, mod = val
+            self.__accuracy = (base, mod, base+mod)
         except ValueError:
             pass
 
@@ -87,7 +93,8 @@ class Stats(itermixin.IterMixin):
     @speed.setter
     def speed(self, val):
         try:
-            self.__speed = int(val)
+            base, mod = val
+            self.__speed = (base, mod, base+mod)
         except ValueError:
             pass
 
@@ -97,7 +104,8 @@ class Stats(itermixin.IterMixin):
     @strength.setter
     def strength(self, val):
         try:
-            self.__strength = int(val)
+            base, mod = val
+            self.__strength = (base, mod, base+mod)
         except ValueError:
             pass
 
@@ -107,10 +115,22 @@ class Stats(itermixin.IterMixin):
     @luck.setter
     def luck(self, val):
         try:
-            self.__luck = int(val)
+            base, mod = val
+            self.__luck = (base, mod, base+mod)
         except ValueError:
             pass
 
+    @property
+    def resistance(self):
+        return self.__resistance
+    @resistance.setter
+    def resistance(self, val):
+        base, mod = val
+        self.__resistance = (base, mod, base+mod)
+
     def getallstats(self):
+        '''
+        returns a dicitonary of the stats
+        '''
         return None
 
