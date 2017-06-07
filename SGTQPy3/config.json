@@ -1,0 +1,42 @@
+{
+  "strs": {
+  "greetings": ["Hello {}! I hope your a P O S I T I V E person today.", "etc"],
+    "help": {
+      "topic here" : []
+    },
+    "dialogue": {
+      "type here" : []
+    }
+  },
+  "custommobs": {
+    "mobname" : {
+    "desc": "desc here",
+    "maxlvl": 10,
+    "rarities": ["list of possible rarities"],
+    "etc":"etc"
+  }
+  },
+  "customitems": {
+    "item":"props"
+  },
+  "classBaseStats": {
+    "rogue": {
+      "health": [5,0,0],
+      "armor": [4,0,0],
+      "power": [3,0,0],
+      "evasion": [6,0,0],
+      "speed": [6,0,0],
+      "strength": [3,0,0],
+      "luck": [4,0,0],
+      "resistance": [5,0,0]
+    }
+  },
+  "maxsessions": 10,
+  "sessionttl": 1000,
+  "maxfloors": 100,
+  "maxplayerlvl": 100000,
+  "maxmoblvl": 1000,
+  "playerafktime": "3h",
+  "kickondeath": true,
+  "etc":"etc"
+}

@@ -1,5 +1,6 @@
 import uuid
 from game import player
+from copy import deepcopy
 
 class GameSession:
     '''
@@ -8,7 +9,7 @@ class GameSession:
     networked nature of the SugoiTomodachiQuest game.
     '''
 
-    def __init__(self):
+    def __init__(self, config):
         self.__players = {}                 # hold the player objects, lookup by username
         self.age = 0                        # the lifetime of this game session
         self.__sid = uuid.uuid4()           # the uid of this game session
@@ -16,6 +17,7 @@ class GameSession:
         self.mobs = []                      # list of mobs present in the game
         self.deepest = 0                    # the furthest level down in the game
         self.floors = 0                     # the current number of floors in the game
+        self.__config = config              # the object representing the games config file
         self.__highscoreplayer = (None,0)   # the player with the highscore and the score
 
     @property
@@ -50,6 +52,12 @@ class GameSession:
                 valid = False
         if valid:
             self.__highscoreplayer = val
+
+    @property
+    def config(self):
+        # return only a copy of the config
+        # so that it is read only?
+        return deepcopy(self.__config)
 
     @property
     def sid(self):
