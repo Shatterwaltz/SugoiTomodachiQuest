@@ -1,5 +1,5 @@
 import random
-from room import Room
+from game.room import Room
 
 """generate and printMap are the only two important ones. import these."""
 
