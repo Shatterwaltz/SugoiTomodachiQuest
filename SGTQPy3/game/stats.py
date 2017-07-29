@@ -22,111 +22,105 @@ class Stats(itermixin.IterMixin):
     '''
 
     def __init__(self):
-        self.__health       = (0,0,0)
-        self.__armor        = (0,0,0)
-        self.__power        = (0,0,0)
-        self.__evasion      = (0,0,0)
-        self.__accuracy     = (0,0,0)
-        self.__speed        = (0,0,0)
-        self.__strength     = (0,0,0)
-        self.__luck         = (0,0,0)
-        self.__resistance   = (0,0,0)
+        self.__health       = (0,0)
+        self.__armor        = (0,0)
+        self.__power        = (0,0)
+        self.__evasion      = (0,0)
+        self.__accuracy     = (0,0)
+        self.__speed        = (0,0)
+        self.__strength     = (0,0)
+        self.__luck         = (0,0)
+        self.__resistance   = (0,0)
 
     @property
     def health(self):
-        return self.__health
+        return self.__health[0]+self.__health[1]
     @health.setter
     def health(self, val):
         try:
-            base, mod = val
-            self.__health = (base, mod, base+mod)  
+            self.__health = val  
         except ValueError:
             pass
 
     @property
     def armor(self):
-        return self.__armor
+        return self.__armor[0]+self.__armor[1]
     @health.setter
     def armor(self, val):
         try:
-            base, mod = val
-            self.__armor = (base, mod, base+mod) 
+            self.__armor=val
         except ValueError:
             pass
 
     @property
     def power(self):
-        return self.__power
+        return self.__power[0]+self.__power[1]
     @power.setter
     def power(self, val):
         try:
-            base, mod = val
-            self.__power = (base, mod, base+mod) 
+            self.__power = val 
         except ValueError:
             pass
 
     @property
     def evasion(self):
-        return self.__evasion
+        return self.__evasion[0]+self.__evasion[1]
     @evasion.setter
     def evasion(self, val):
         try:
-            base, mod = val
-            self.__evasion = (base, mod, base+mod)
+            self.__evasion = val
         except ValueError:
             pass
 
     @property
     def accuracy(self):
-        return self.__accuracy
+        return self.__accuracy[0]+self.__accuracy[1]
     @accuracy.setter
     def accuracy(self, val):
         try:
-            base, mod = val
-            self.__accuracy = (base, mod, base+mod)
+            self.__accuracy=val
         except ValueError:
             pass
 
     @property
     def speed(self):
-        return self.__speed
+        return self.__speed[0]+ self.__speed[1]
     @speed.setter
     def speed(self, val):
         try:
-            base, mod = val
-            self.__speed = (base, mod, base+mod)
+         self.__speed=val
         except ValueError:
             pass
 
     @property
     def strength(self):
-        return self.__strength
+        return self.__strength[0]+self.__strength[1]
     @strength.setter
     def strength(self, val):
         try:
-            base, mod = val
-            self.__strength = (base, mod, base+mod)
+            self.__strength=val
         except ValueError:
             pass
 
     @property
     def luck(self):
-        return self.__luck
+        return self.__luck[0]+ self.__luck[1]
     @luck.setter
     def luck(self, val):
         try:
-            base, mod = val
-            self.__luck = (base, mod, base+mod)
+             self.__luck=val
         except ValueError:
             pass
 
     @property
     def resistance(self):
-        return self.__resistance
+        return self.__resistance[0]+self.__resistance[1]
     @resistance.setter
     def resistance(self, val):
-        base, mod = val
-        self.__resistance = (base, mod, base+mod)
+        try:
+            self.__resistance=val
+        except ValueError:
+            pass
 
     def getallstats(self):
         '''

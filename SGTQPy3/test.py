@@ -16,5 +16,10 @@ charactertest.test_stat_apply()
 configtest.test_config_read()
 
 #Test mapGen class
-mapGenTest.test_map_gen()"""
-gearTest.gear_test(10)
+mapGenTest.test_map_gen()
+gearTest.gear_test(10)"""
+
+#Test stats
+statObj = stats.Stats()
+statObj.health=(15,5)
+print(statObj.health)
