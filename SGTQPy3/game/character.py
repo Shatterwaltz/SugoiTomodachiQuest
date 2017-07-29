@@ -1,4 +1,5 @@
 from game import stats
+from game import gear
 import copy
 import random
 
@@ -17,14 +18,47 @@ class Character(object):
         self.awake = False
         self.exp = 0
         self.__stats = stats.Stats()
+        self.__gear = [gear.Gear(140), gear.Gear(140), gear.Gear(140), gear.Gear(140), gear.Gear(140)]
         
+        #Effects will have (stat, mod, duration)
+        self.__effects=[]
+        self.refreshMods()
     @property
     def stats(self):
         return self.__stats
-
     @stats.setter
     def stats(self, val):
         self.__stats = val
+
+    @property
+    def gear(self):
+        return self.__gear
+    @gear.setter
+    #Set gear piece into the correct slot, overwriting the original.
+    #Call refreshMods to update the modifiers to each stat. 
+    def gear(self, val):
+        self.__gear[val.gearType]=val
+        refreshMods()
+        
+    #For each stat, loop through all gear pieces and add the
+    #values of mods that affect the current stat. 
+    #repeat for currently active effects. 
+    def refreshMods(self):
+        for curStat in self.__stats.__dict__:
+            tmp=0;
+            for gearPiece in self.__gear:
+                for mod in gearPiece.mods:
+                    if mod[0]==curStat:
+                        tmp+=mod[1]
+                for effect in self.__effects:
+                    if effect[0]==curStat:
+                        tmp+=effect[1]
+        #TODO: Still gotta set tmp as the mod of curstat
+        #Probably have to change stat get property to return 
+        #whole tuple instead of just the sum. 
+        #Change how iterating through stats so can
+        #reference and modify current stat.
+
 
     def genStats(self, baseStats):
         '''
@@ -35,7 +69,7 @@ class Character(object):
         for the given class
         E.g.
             base pool of 40 plus additional 5 to randomly dist
-            rougue:
+                rougue:
                 health:     (5, 2, 7)
                 armor:      (4, 0, 4)
                 power:      (3, 1, 4)
@@ -59,10 +93,8 @@ class Character(object):
             pool = 5
             while pool > 0:
                 stat = random.choice(list(self.stats.__dict__))
-                print(stat)
                 base, mod, modified = self.stats.__dict__[stat]
                 newMod = int(1 + random.random() * pool)
-                print(newMod)
                 pool = pool - newMod
                 newMod = newMod + mod
                 newStat = (base, newMod, base+newMod) 

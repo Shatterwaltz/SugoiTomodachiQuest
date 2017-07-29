@@ -4,6 +4,8 @@ from test import mapGenTest"""
 from test import gearTest
 
 from game import stats
+from game import character
+from game import gear
 
 # tests or whatever
 """
@@ -19,7 +21,10 @@ configtest.test_config_read()
 mapGenTest.test_map_gen()
 gearTest.gear_test(10)"""
 
-#Test stats
-statObj = stats.Stats()
-statObj.health=(15,5)
-print(statObj.health)
+#Test char stuff
+
+boy = character.Character(0,0,0)
+for stat in boy.stats:
+    print(stat)
+
+

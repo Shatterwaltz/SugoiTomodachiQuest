@@ -26,7 +26,6 @@ class Gear(object):
 		for i in (range((self.__modCount))):
 			"""Add a tuple (stat, modifier) to list of mods"""
 			self.__mods.append( (random.choice(list(self.__statObject.__dict__)), self.__generateModValue()))
-		
 	@property
 	def gearType(self):
 		return self.__gearType
@@ -42,8 +41,8 @@ class Gear(object):
 	"""Apply algorithm to create table of chance to roll each item tier"""
 	def __generateTierTable(self):
 		"""first, assign an even probability to every tier."""
-		dropTable = [(100/self.__availableTiers) for i in range(self.__availableTiers)]
-		"""the value i is used in modifying drop rates"""
+		dropTable = [(100.0/self.__availableTiers) for i in range(self.__availableTiers)]
+                """the value i is used in modifying drop rates"""
 		i = len(dropTable)/2
 		"""n is used to track the current step, working backwards through the array"""
 		n = len(dropTable)-1
