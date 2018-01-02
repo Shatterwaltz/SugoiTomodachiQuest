@@ -2,3 +2,4 @@
 SGTQPy3/**/*.pyc
 **/__pycache__/
 *.swp
+/env/
